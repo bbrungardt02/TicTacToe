@@ -47,6 +47,8 @@ body {
   opacity: 0.9;
 }
 #newGameButton {
+  margin-top: 10px;
+  margin-bottom: 10px;
   color: aliceblue;
   font-size: x-large;
   display: inline-block;
