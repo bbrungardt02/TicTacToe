@@ -1,0 +1,63 @@
+body {
+  background-color: dodgerblue;
+}
+#title {
+  display: flex;
+  justify-content: center;
+  color: aliceblue;
+}
+#title2 {
+  color: aliceblue;
+}
+#playerName {
+  opacity: 0.4;
+  color: aliceblue;
+}
+.board {
+  width: 40rem;
+  height: 40rem;
+  margin: 0 auto;
+  background-color: rgb(4, 93, 182);
+  border: 6px solid aliceblue;
+  border-radius: 10px;
+  display: grid;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+}
+.box {
+  border: 6px solid aliceblue;
+  font-weight: bold;
+  font-size: 4em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#startGameButton {
+  color: aliceblue;
+  font-size: x-large;
+  display: inline-block;
+  align-self: center;
+  float: right;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgb(4, 93, 182);
+  box-shadow: 2px 2px 2px aliceblue;
+}
+#startGameButton:hover {
+  box-shadow: 2px 2px 2px black;
+  opacity: 0.9;
+}
+#newGameButton {
+  color: aliceblue;
+  font-size: x-large;
+  display: inline-block;
+  align-self: center;
+  float: right;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgb(4, 93, 182);
+  box-shadow: 2px 2px 2px aliceblue;
+}
+#newGameButton:hover {
+  box-shadow: 2px 2px 2px black;
+  opacity: 0.9;
+}
