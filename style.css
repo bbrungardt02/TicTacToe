@@ -9,7 +9,14 @@ body {
 #title2 {
   color: aliceblue;
 }
+#cpuTitle {
+  color: aliceblue;
+}
 #playerName {
+  opacity: 0.4;
+  color: aliceblue;
+}
+#cpuName {
   opacity: 0.4;
   color: aliceblue;
 }

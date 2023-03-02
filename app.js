@@ -1,12 +1,18 @@
 const newGameButton = document.getElementById("newGameButton");
 const startGameButton = document.getElementById("startGameButton");
+const onePlayer = document.getElementById("onePlayer");
+const twoPlayer = document.getElementById("twoPlayer");
 
 function enterName() {
   const html = `
+  <h3 id="title2">Player:</h3>
   <form id="new-item">
     <input id="new-item-text" type="text" placeholder="Enter Player Name" required>
     <button>Submit</button>
-  </form>`;
+  </form>
+  <h3 id="cpuTitle">Player:</h3>
+  <h2 id="cpuName">Computer</h2>
+  `;
   const enterPlayerName = document.getElementById("enterPlayerName");
   enterPlayerName.innerHTML = html;
   function submitName(event) {
@@ -34,7 +40,31 @@ function enterName() {
   newItemForm.addEventListener("submit", submitName);
 }
 
-// function newGame() {}
+function runPlayerOne() {
+  const pickPlayerAmtList = document.getElementById("pickPlayerAmtList");
+  pickPlayerAmtList.style.display = "none";
+  enterName();
+}
 
-startGameButton.addEventListener("click", enterName);
+function runPlayerTwo() {
+  const pickPlayerAmtList = document.getElementById("pickPlayerAmtList");
+  pickPlayerAmtList.style.display = "none";
+}
+
+function amtOfPlayers() {
+  const html0 = `
+  <ul id="pickPlayerAmtList">
+  <li id="onePlayer">One Player</li>
+  <li id="twoPlayer">Two Player</li>
+  </ul>
+  `;
+  const pickPlayerAmt = document.getElementById("pickPlayerAmt");
+  pickPlayerAmt.innerHTML = html0;
+  onePlayer.addEventListener("click", runPlayerOne);
+  twoPlayer.addEventListener("click", runPlayerTwo);
+}
+
+function newGame() {}
+
+startGameButton.addEventListener("click", amtOfPlayers);
 newGameButton.addEventListener("click", newGame);
