@@ -6,20 +6,147 @@ body {
   justify-content: center;
   color: aliceblue;
 }
+
+#startButtonParent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#startGameButton {
+  color: aliceblue;
+  font-size: xx-large;
+  display: inline-block;
+  margin-top: 8%;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgb(4, 93, 182);
+  box-shadow: 2px 2px 2px aliceblue;
+}
+#startGameButton:hover {
+  box-shadow: 2px 2px 2px black;
+  opacity: 0.9;
+}
+
+#human {
+  display: inline-block;
+  list-style-type: none;
+}
+#comp {
+  display: inline-block;
+  list-style-type: none;
+  float: right;
+  padding-right: 2.5rem;
+}
 #title2 {
+  font-size: large;
   color: aliceblue;
 }
 #cpuTitle {
-  color: aliceblue;
-}
-#playerName {
-  opacity: 0.4;
+  font-size: large;
   color: aliceblue;
 }
 #cpuName {
   opacity: 0.4;
   color: aliceblue;
+  font-size: x-large;
 }
+#playerName {
+  opacity: 0.4;
+  color: aliceblue;
+  font-size: x-large;
+}
+#new-item-text {
+  background-color: aliceblue;
+  border: 2px solid aliceblue;
+  border-radius: 10px;
+  text-align: center;
+  padding: 5px;
+}
+#firstButton {
+  border: 2px solid rgb(4, 93, 182);
+  font-size: large;
+  color: aliceblue;
+  padding: 5px;
+  border-radius: 10px;
+  background-color: rgb(4, 93, 182);
+  box-shadow: 2px 2px 2px aliceblue;
+}
+#firstButton:hover {
+  box-shadow: 2px 2px 2px black;
+  opacity: 0.9;
+}
+
+#human2 {
+  display: inline-block;
+  list-style-type: none;
+}
+#comp2 {
+  display: inline-block;
+  list-style-type: none;
+  float: right;
+  padding-right: 2.5rem;
+}
+#player2Title {
+  font-size: large;
+  color: aliceblue;
+}
+#player2Name {
+  opacity: 0.4;
+  color: aliceblue;
+  font-size: x-large;
+}
+#new-item-text2 {
+  background-color: aliceblue;
+  border: 2px solid aliceblue;
+  border-radius: 10px;
+  text-align: center;
+  padding: 5px;
+}
+#secondButton {
+  border: 2px solid rgb(4, 93, 182);
+  font-size: large;
+  color: aliceblue;
+  padding: 5px;
+  border-radius: 10px;
+  background-color: rgb(4, 93, 182);
+  box-shadow: 2px 2px 2px aliceblue;
+}
+#secondButton:hover {
+  box-shadow: 2px 2px 2px black;
+  opacity: 0.9;
+}
+
+#pickPlayerAmtList {
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+}
+#onePlayer {
+  color: aliceblue;
+  font-size: x-large;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgb(4, 93, 182);
+  box-shadow: 2px 2px 2px aliceblue;
+}
+#onePlayer:hover {
+  box-shadow: 2px 2px 2px black;
+  opacity: 0.9;
+}
+#twoPlayer {
+  color: aliceblue;
+  font-size: x-large;
+  padding: 10px;
+  margin-right: 2.5rem;
+  border-radius: 10px;
+  background-color: rgb(4, 93, 182);
+  box-shadow: 2px 2px 2px aliceblue;
+}
+#twoPlayer:hover {
+  box-shadow: 2px 2px 2px black;
+  opacity: 0.9;
+}
+
 .board {
   width: 40rem;
   height: 40rem;
@@ -38,21 +165,7 @@ body {
   justify-content: center;
   align-items: center;
 }
-#startGameButton {
-  color: aliceblue;
-  font-size: x-large;
-  display: inline-block;
-  align-self: center;
-  float: right;
-  padding: 10px;
-  border-radius: 10px;
-  background-color: rgb(4, 93, 182);
-  box-shadow: 2px 2px 2px aliceblue;
-}
-#startGameButton:hover {
-  box-shadow: 2px 2px 2px black;
-  opacity: 0.9;
-}
+
 #newGameButton {
   margin-top: 10px;
   margin-bottom: 10px;
