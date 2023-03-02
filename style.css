@@ -40,18 +40,18 @@ body {
 #title2 {
   font-size: large;
   color: aliceblue;
+  opacity: 0.4;
 }
 #cpuTitle {
   font-size: large;
   color: aliceblue;
+  opacity: 0.4;
 }
 #cpuName {
-  opacity: 0.4;
   color: aliceblue;
   font-size: x-large;
 }
 #playerName {
-  opacity: 0.4;
   color: aliceblue;
   font-size: x-large;
 }
@@ -87,11 +87,11 @@ body {
   padding-right: 2.5rem;
 }
 #player2Title {
+  opacity: 0.4;
   font-size: large;
   color: aliceblue;
 }
 #player2Name {
-  opacity: 0.4;
   color: aliceblue;
   font-size: x-large;
 }
