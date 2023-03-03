@@ -27,21 +27,28 @@ function runPlayerOne() {
     playerName.innerText = newItemTextInput.value;
     newItemForm.style.display = "none";
     const html2 = `<div class="board">
-  <div class="box"></div>
-  <div class="box"></div>
-  <div class="box"></div>
-  <div class="box"></div>
-  <div class="box"></div>
-  <div class="box"></div>
-  <div class="box"></div>
-  <div class="box"></div>
-  <div class="box"></div>
+  <div class="box" id="one"></div>
+  <div class="box" id="two"></div>
+  <div class="box" id="three"></div>
+  <div class="box" id="four"></div>
+  <div class="box" id="five"></div>
+  <div class="box" id="six"></div>
+  <div class="box" id="seven"></div>
+  <div class="box" id="eight"></div>
+  <div class="box" id="nine"></div>
   </div><div id="newGameButton">New Game</div>`;
     const boardContainer = document.getElementById("boardContainer");
     boardContainer.innerHTML = html2;
   }
   const newItemForm = document.getElementById("new-item");
   newItemForm.addEventListener("submit", submitName);
+  let gameState = {
+    board: [
+      [null, null, null],
+      [null, null, null],
+      [null, null, null],
+    ],
+  };
 }
 
 function runPlayerTwo2() {
@@ -61,21 +68,28 @@ function runPlayerTwo2() {
     player2Name.innerText = newItemTextInput2.value;
     newItemForm2.style.display = "none";
     const html2 = `<div class="board">
-  <div class="box"></div>
-  <div class="box"></div>
-  <div class="box"></div>
-  <div class="box"></div>
-  <div class="box"></div>
-  <div class="box"></div>
-  <div class="box"></div>
-  <div class="box"></div>
-  <div class="box"></div>
+    <div class="box" id="one"></div>
+    <div class="box" id="two"></div>
+    <div class="box" id="three"></div>
+    <div class="box" id="four"></div>
+    <div class="box" id="five"></div>
+    <div class="box" id="six"></div>
+    <div class="box" id="seven"></div>
+    <div class="box" id="eight"></div>
+    <div class="box" id="nine"></div>
   </div><div id="newGameButton">New Game</div>`;
     const boardContainer = document.getElementById("boardContainer");
     boardContainer.innerHTML = html2;
   }
   const newItemForm2 = document.getElementById("new-item2");
   newItemForm2.addEventListener("submit", submitName2);
+  let gameState = {
+    board: [
+      [null, null, null],
+      [null, null, null],
+      [null, null, null],
+    ],
+  };
 }
 
 function runPlayerTwo() {
