@@ -1,6 +1,23 @@
 const newGameButton = document.getElementById("newGameButton");
 const startGameButton = document.getElementById("startGameButton");
 
+function renderGame() {
+  // Call this function after you've changed your state values
+  // Make references to DOM elements, and set the innerText,
+  // or innerHTML to reflect our gameState.board
+}
+
+function checkWin() {
+  // Maybe this calls other helper functions?
+  // function checkRow() {}
+  // function checkColumn() {}
+  // function checkDiagonals() {}
+}
+
+function switchPlayer() {
+  // ???
+}
+
 function runPlayerOne() {
   const pickPlayerAmtList = document.getElementById("pickPlayerAmtList");
   pickPlayerAmtList.style.display = "none";
@@ -27,15 +44,15 @@ function runPlayerOne() {
     playerName.innerText = newItemTextInput.value;
     newItemForm.style.display = "none";
     const html2 = `<div class="board">
-  <div class="box" id="one"></div>
-  <div class="box" id="two"></div>
-  <div class="box" id="three"></div>
-  <div class="box" id="four"></div>
-  <div class="box" id="five"></div>
-  <div class="box" id="six"></div>
-  <div class="box" id="seven"></div>
-  <div class="box" id="eight"></div>
-  <div class="box" id="nine"></div>
+    <div class="box" id="0,0"></div>
+    <div class="box" id="0,1"></div>
+    <div class="box" id="0,2"></div>
+    <div class="box" id="1,0"></div>
+    <div class="box" id="1,1"></div>
+    <div class="box" id="1,2"></div>
+    <div class="box" id="2,0"></div>
+    <div class="box" id="2,1"></div>
+    <div class="box" id="2,2"></div>
   </div><div id="newGameButton">New Game</div>`;
     const boardContainer = document.getElementById("boardContainer");
     boardContainer.innerHTML = html2;
@@ -43,12 +60,23 @@ function runPlayerOne() {
   const newItemForm = document.getElementById("new-item");
   newItemForm.addEventListener("submit", submitName);
   let gameState = {
+    players: ["x", "o"],
     board: [
       [null, null, null],
       [null, null, null],
       [null, null, null],
     ],
+    currentPlayer: gameState.players.slice(0),
+    gameStatus: ["isPlaying"],
+    // Maybe a current Player?
+    // A game status?? 'isPlaying' or 'over'
+    // Any other data your game logic depends on?
   };
+  board.addEventListener("click", function (event) {
+    // Figure out how to get the coordinates off event object (e.target.value)
+    // Use those coordinates to reference indexes in our gameState.board
+    // Set the position in our board to the current player
+  });
 }
 
 function runPlayerTwo2() {
@@ -68,15 +96,15 @@ function runPlayerTwo2() {
     player2Name.innerText = newItemTextInput2.value;
     newItemForm2.style.display = "none";
     const html2 = `<div class="board">
-    <div class="box" id="one"></div>
-    <div class="box" id="two"></div>
-    <div class="box" id="three"></div>
-    <div class="box" id="four"></div>
-    <div class="box" id="five"></div>
-    <div class="box" id="six"></div>
-    <div class="box" id="seven"></div>
-    <div class="box" id="eight"></div>
-    <div class="box" id="nine"></div>
+    <div class="box" id="0,0"></div>
+    <div class="box" id="0,1"></div>
+    <div class="box" id="0,2"></div>
+    <div class="box" id="1,0"></div>
+    <div class="box" id="1,1"></div>
+    <div class="box" id="1,2"></div>
+    <div class="box" id="2,0"></div>
+    <div class="box" id="2,1"></div>
+    <div class="box" id="2,2"></div>
   </div><div id="newGameButton">New Game</div>`;
     const boardContainer = document.getElementById("boardContainer");
     boardContainer.innerHTML = html2;
@@ -84,12 +112,23 @@ function runPlayerTwo2() {
   const newItemForm2 = document.getElementById("new-item2");
   newItemForm2.addEventListener("submit", submitName2);
   let gameState = {
+    players: ["x", "o"],
     board: [
       [null, null, null],
       [null, null, null],
       [null, null, null],
     ],
+    currentPlayer: gameState.players.slice(0),
+    gameStatus: ["isPlaying"],
+    // Maybe a current Player?
+    // A game status?? 'isPlaying' or 'over'
+    // Any other data your game logic depends on?
   };
+  board.addEventListener("click", function (event) {
+    // Figure out how to get the coordinates off event object (e.target.value)
+    // Use those coordinates to reference indexes in our gameState.board
+    // Set the position in our board to the current player
+  });
 }
 
 function runPlayerTwo() {
@@ -139,7 +178,15 @@ function amtOfPlayers() {
   twoPlayer.addEventListener("click", runPlayerTwo);
 }
 
-// function newGame() {}
+function newGame() {
+  let gameState = {
+    board: [
+      [null, null, null],
+      [null, null, null],
+      [null, null, null],
+    ],
+  };
+}
 
 startGameButton.addEventListener("click", amtOfPlayers);
 newGameButton.addEventListener("click", newGame);
