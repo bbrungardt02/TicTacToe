@@ -81,7 +81,7 @@ function switchPlayer() {
 function boardClick(event) {
   switchPlayer();
   // gameState.board.indexOf(event.target.value) = gameState.currentPlayer;
-  renderGame(gameState.board);
+  renderGame();
   // Figure out how to get the coordinates off event object (e.target.value)
   // Use those coordinates to reference indexes in our gameState.board
   // Set the position in our board to the current player
@@ -149,14 +149,14 @@ function runPlayerTwo() {
 
 function amtOfPlayers() {
   startGameButton.style.display = "none";
-  const html0 = `
+  const html4 = `
   <ul id="pickPlayerAmtList">
   <li id="onePlayer">One Player</li>
   <li id="twoPlayer">Two Player</li>
   </ul>
   `;
   const pickPlayerAmt = document.getElementById("pickPlayerAmt");
-  pickPlayerAmt.innerHTML = html0;
+  pickPlayerAmt.innerHTML = html4;
   const onePlayer = document.getElementById("onePlayer");
   const twoPlayer = document.getElementById("twoPlayer");
   onePlayer.addEventListener("click", runPlayerOne);
