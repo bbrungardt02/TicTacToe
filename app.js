@@ -1,21 +1,49 @@
 const newGameButton = document.getElementById("newGameButton");
 const startGameButton = document.getElementById("startGameButton");
+const board = document.querySelector(".board")
+
+let gameState = {
+  board: [
+    [null, null, null],
+    [null, null, null],
+    [null, null, null],
+  ],
+  players: ["x", "o"],
+  currentPlayer: [null],
+  gameStatus: ["isPlaying"],
+  // Maybe a current Player?
+  // A game status?? 'isPlaying' or 'over'
+  // Any other data your game logic depends on?
+};
+gameState.currentPlayer = gameState.players[0];
 
 function renderGame() {
+  gameBoard.innerText = gameState.board
   // Call this function after you've changed your state values
   // Make references to DOM elements, and set the innerText,
   // or innerHTML to reflect our gameState.board
 }
 
-function checkWin() {
-  // Maybe this calls other helper functions?
-  // function checkRow() {}
-  // function checkColumn() {}
-  // function checkDiagonals() {}
-}
+// function checkWin() {
+//   // Maybe this calls other helper functions?
+//   // function checkRow() {}
+//   // function checkColumn() {}
+//   // function checkDiagonals() {}
+// }
 
 function switchPlayer() {
-  // ???
+  let currentIndex = gameState.players.indexOf(gameState.currentPlayer);
+  let nextIndex = (currentIndex + 1) % gameState.players.length;
+  gameState.currentPlayer = gameState.players[nextIndex];
+}
+
+function boardClick(event) {
+  switchPlayer();
+  gameState.board.indexOf(event.target.value) = gameState.currentPlayer;
+  renderGame()
+  // Figure out how to get the coordinates off event object (e.target.value)
+  // Use those coordinates to reference indexes in our gameState.board
+  // Set the position in our board to the current player
 }
 
 function runPlayerOne() {
@@ -59,24 +87,6 @@ function runPlayerOne() {
   }
   const newItemForm = document.getElementById("new-item");
   newItemForm.addEventListener("submit", submitName);
-  let gameState = {
-    players: ["x", "o"],
-    board: [
-      [null, null, null],
-      [null, null, null],
-      [null, null, null],
-    ],
-    currentPlayer: gameState.players.slice(0),
-    gameStatus: ["isPlaying"],
-    // Maybe a current Player?
-    // A game status?? 'isPlaying' or 'over'
-    // Any other data your game logic depends on?
-  };
-  board.addEventListener("click", function (event) {
-    // Figure out how to get the coordinates off event object (e.target.value)
-    // Use those coordinates to reference indexes in our gameState.board
-    // Set the position in our board to the current player
-  });
 }
 
 function runPlayerTwo2() {
@@ -111,24 +121,6 @@ function runPlayerTwo2() {
   }
   const newItemForm2 = document.getElementById("new-item2");
   newItemForm2.addEventListener("submit", submitName2);
-  let gameState = {
-    players: ["x", "o"],
-    board: [
-      [null, null, null],
-      [null, null, null],
-      [null, null, null],
-    ],
-    currentPlayer: gameState.players.slice(0),
-    gameStatus: ["isPlaying"],
-    // Maybe a current Player?
-    // A game status?? 'isPlaying' or 'over'
-    // Any other data your game logic depends on?
-  };
-  board.addEventListener("click", function (event) {
-    // Figure out how to get the coordinates off event object (e.target.value)
-    // Use those coordinates to reference indexes in our gameState.board
-    // Set the position in our board to the current player
-  });
 }
 
 function runPlayerTwo() {
@@ -178,15 +170,16 @@ function amtOfPlayers() {
   twoPlayer.addEventListener("click", runPlayerTwo);
 }
 
-function newGame() {
-  let gameState = {
-    board: [
-      [null, null, null],
-      [null, null, null],
-      [null, null, null],
-    ],
-  };
-}
+// function newGame() {
+//   let gameState = {
+//     board: [
+//       [null, null, null],
+//       [null, null, null],
+//       [null, null, null],
+//     ],
+//   };
+// }
 
 startGameButton.addEventListener("click", amtOfPlayers);
-newGameButton.addEventListener("click", newGame);
+// newGameButton.addEventListener("click", newGame);
+board.addEventListener("click", boardClick);
