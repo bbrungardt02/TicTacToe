@@ -1,16 +1,17 @@
 const newGameButton = document.getElementById("newGameButton");
 const startGameButton = document.getElementById("startGameButton");
+const boardContainer = document.getElementById("boardContainer");
 
 const html = `<div class="board">
-    <div class="box" id="0,0"></div>
-    <div class="box" id="0,1"></div>
-    <div class="box" id="0,2"></div>
-    <div class="box" id="1,0"></div>
-    <div class="box" id="1,1"></div>
-    <div class="box" id="1,2"></div>
-    <div class="box" id="2,0"></div>
-    <div class="box" id="2,1"></div>
-    <div class="box" id="2,2"></div>
+    <div class="cell" id="0,0"></div>
+    <div class="cell" id="0,1"></div>
+    <div class="cell" id="0,2"></div>
+    <div class="cell" id="1,0"></div>
+    <div class="cell" id="1,1"></div>
+    <div class="cell" id="1,2"></div>
+    <div class="cell" id="2,0"></div>
+    <div class="cell" id="2,1"></div>
+    <div class="cell" id="2,2"></div>
   </div><div id="newGameButton">New Game</div>`;
 
 const html1 = `
@@ -52,25 +53,29 @@ let gameState = {
   players: ["x", "o"],
   currentPlayer: [null],
   gameStatus: ["isPlaying"],
-  // Maybe a current Player?
-  // A game status?? 'isPlaying' or 'over'
-  // Any other data your game logic depends on?
 };
 gameState.currentPlayer = gameState.players[0];
 
-function renderGame() {
-  board.innerText = gameState.board.value;
+function renderGame(gameState) {
+  const board = gameState.board;
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board.length; j++) {
+      const cell = document.getElementById(`${i},${j}`);
+      cell.innerText = board[i][j];
+    }
+  }
+  console.log(gameState.board);
   // Call this function after you've changed your state values
   // Make references to DOM elements, and set the innerText,
   // or innerHTML to reflect our gameState.board
 }
 
-// function checkWin() {
-//   // Maybe this calls other helper functions?
-//   // function checkRow() {}
-//   // function checkColumn() {}
-//   // function checkDiagonals() {}
-// }
+function checkWin() {
+  //   // Maybe this calls other helper functions?
+  //   // function checkRow() {}
+  //   // function checkColumn() {}
+  //   // function checkDiagonals() {}
+}
 
 function switchPlayer() {
   let currentIndex = gameState.players.indexOf(gameState.currentPlayer);
@@ -79,9 +84,12 @@ function switchPlayer() {
 }
 
 function boardClick(event) {
+  // renderGame();
+  // event.target.value = gameState.currentPlayer;
+  // console.log(event.target.value);
+  // gameState.board.splice(event.target.value, gameState.currentPlayer);
   switchPlayer();
-  // gameState.board.indexOf(event.target.value) = gameState.currentPlayer;
-  renderGame();
+  // checkWin();
   // Figure out how to get the coordinates off event object (e.target.value)
   // Use those coordinates to reference indexes in our gameState.board
   // Set the position in our board to the current player
@@ -140,8 +148,6 @@ function runPlayerTwo() {
     playerName.innerText = newItemTextInput.value;
     newItemForm.style.display = "none";
     runPlayerTwo2();
-    const board = document.querySelector(".board");
-    board.addEventListener("click", boardClick);
   }
   const newItemForm = document.getElementById("new-item");
   newItemForm.addEventListener("submit", submitName);
@@ -163,15 +169,15 @@ function amtOfPlayers() {
   twoPlayer.addEventListener("click", runPlayerTwo);
 }
 
-// function newGame() {
-//   let gameState = {
-//     board: [
-//       [null, null, null],
-//       [null, null, null],
-//       [null, null, null],
-//     ],
-//   };
-// }
-
+function newGame() {
+  //   let gameState = {
+  //     board: [
+  //       [null, null, null],
+  //       [null, null, null],
+  //       [null, null, null],
+  //     ],
+  //   };
+}
+boardContainer.addEventListener("click", boardClick);
 startGameButton.addEventListener("click", amtOfPlayers);
 // newGameButton.addEventListener("click", newGame);
