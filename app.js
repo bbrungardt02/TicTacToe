@@ -56,7 +56,7 @@ let gameState = {
 };
 gameState.currentPlayer = gameState.players[0];
 
-function renderGame(gameState) {
+function renderGame() {
   const board = gameState.board;
   for (let i = 0; i < board.length; i++) {
     for (let j = 0; j < board.length; j++) {
@@ -84,7 +84,12 @@ function switchPlayer() {
 }
 
 function boardClick(event) {
-  // renderGame();
+  //<div id="0,0"></div>
+  //now ids is an array of numbers.  
+  let ids = event.target.id.split(',').map((item) => parseInt(item));
+  gameState.board[ids[0]][ids[1]] = gameState.currentPlayer;
+
+  renderGame();
   // event.target.value = gameState.currentPlayer;
   // console.log(event.target.value);
   // gameState.board.splice(event.target.value, gameState.currentPlayer);
