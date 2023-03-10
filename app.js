@@ -1,6 +1,7 @@
-const newGameButton = document.getElementById("newGameButton");
 const startGameButton = document.getElementById("startGameButton");
 const boardContainer = document.getElementById("boardContainer");
+const newGameButton = document.getElementById("newGameButton");
+newGameButton.style.display = "none";
 
 const html = `<div class="board">
     <div class="cell" id="0,0"></div>
@@ -12,7 +13,7 @@ const html = `<div class="board">
     <div class="cell" id="2,0"></div>
     <div class="cell" id="2,1"></div>
     <div class="cell" id="2,2"></div>
-  </div><div id="newGameButton">New Game</div>`;
+  </div>`;
 
 const html1 = `
   <ul id="human">
@@ -52,26 +53,73 @@ let gameState = {
   ],
   players: ["x", "o"],
   currentPlayer: [null],
-  gameStatus: ["isPlaying"],
+  gameStatus: "isPlaying",
 };
 gameState.currentPlayer = gameState.players[0];
+const board = gameState.board;
 
 function renderGame() {
-  const board = gameState.board;
   for (let i = 0; i < board.length; i++) {
     for (let j = 0; j < board.length; j++) {
       const cell = document.getElementById(`${i},${j}`);
       cell.innerText = board[i][j];
     }
   }
-  console.log(gameState.board);
+}
+
+function checkRow() {
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board.length; j++) {
+      if (
+        board[i][0] !== null &&
+        board[i][0] === board[i][1] &&
+        board[i][1] === board[i][2]
+      ) {
+        gameState.gameStatus = "isOver";
+        console.log(board[i][0]);
+        return board[i][0];
+      }
+    }
+  }
+}
+function checkColumn() {
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board.length; j++) {
+      if (
+        board[0][j] !== null &&
+        board[0][j] === board[1][j] &&
+        board[1][j] === board[2][j]
+      ) {
+        gameState.gameStatus = "isOver";
+        console.log(board[0][j]);
+        return board[0][j];
+      }
+    }
+  }
+}
+function checkDiagonals() {
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board.length; j++) {
+      if (
+        (board[0][0] !== null &&
+          board[0][0] === board[1][1] &&
+          board[1][1] === board[2][2]) ||
+        (board[0][2] !== null &&
+          board[0][2] === board[1][1] &&
+          board[1][1] === board[2][0])
+      ) {
+        gameState.gameStatus = "isOver";
+        console.log(board[1][1]);
+        return board[1][1];
+      }
+    }
+  }
 }
 
 function checkWin() {
-  //   // Maybe this calls other helper functions?
-  //   // function checkRow() {}
-  //   // function checkColumn() {}
-  //   // function checkDiagonals() {}
+  checkRow();
+  checkColumn();
+  checkDiagonals();
 }
 
 function switchPlayer() {
@@ -82,10 +130,17 @@ function switchPlayer() {
 
 function boardClick(event) {
   let ids = event.target.id.split(",").map((item) => parseInt(item));
-  gameState.board[ids[0]][ids[1]] = gameState.currentPlayer;
-  switchPlayer();
-  renderGame();
-  // checkWin();
+  if (gameState.gameStatus === "isOver") {
+    return;
+  }
+  if (board[ids[0]][ids[1]] !== null) {
+    return;
+  } else {
+    board[ids[0]][ids[1]] = gameState.currentPlayer;
+    switchPlayer();
+    renderGame();
+    checkWin();
+  }
 }
 
 function runPlayerOne() {
@@ -101,6 +156,7 @@ function runPlayerOne() {
     newItemForm.style.display = "none";
     const boardContainer = document.getElementById("boardContainer");
     boardContainer.innerHTML = html;
+    newGameButton.style.display = "inline-block";
   }
   const newItemForm = document.getElementById("new-item");
   newItemForm.addEventListener("submit", submitName);
@@ -124,6 +180,7 @@ function runPlayerTwo2() {
     newItemForm2.style.display = "none";
     const boardContainer = document.getElementById("boardContainer");
     boardContainer.innerHTML = html;
+    newGameButton.style.display = "inline-block";
   }
   const newItemForm2 = document.getElementById("new-item2");
   newItemForm2.addEventListener("submit", submitName2);
@@ -163,15 +220,17 @@ function amtOfPlayers() {
 }
 
 function newGame() {
-  let gameState = {
-    board: [
-      [null, null, null],
-      [null, null, null],
-      [null, null, null],
-    ],
-  };
+  board.splice(
+    0,
+    3,
+    [null, null, null],
+    [null, null, null],
+    [null, null, null]
+  );
+  gameState.gameStatus = "isPlaying";
+  renderGame();
 }
 
 boardContainer.addEventListener("click", boardClick);
 startGameButton.addEventListener("click", amtOfPlayers);
-// newGameButton.addEventListener("click", newGame);
+newGameButton.addEventListener("click", newGame);

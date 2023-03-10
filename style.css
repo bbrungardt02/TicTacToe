@@ -161,12 +161,14 @@ body {
   grid-template: repeat(3, 1fr) / repeat(3, 1fr);
 }
 .cell {
-  border: 6px solid aliceblue;
-  font-weight: bold;
-  font-size: 4em;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: aliceblue;
+  border: 6px solid aliceblue;
+  font-weight: bold;
+  font-size: 10em;
 }
 
 #newGameButton {
