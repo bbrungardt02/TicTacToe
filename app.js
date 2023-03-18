@@ -1,6 +1,8 @@
 const startGameButton = document.getElementById("startGameButton");
 const boardContainer = document.getElementById("boardContainer");
 const newGameButton = document.getElementById("newGameButton");
+const xDiv = document.createElement("div");
+const oDiv = document.createElement("div");
 newGameButton.style.display = "none";
 
 const html = `<div class="board">
@@ -58,15 +60,6 @@ let gameState = {
 gameState.currentPlayer = gameState.players[0];
 const board = gameState.board;
 
-function renderGame() {
-  for (let i = 0; i < board.length; i++) {
-    for (let j = 0; j < board.length; j++) {
-      const cell = document.getElementById(`${i},${j}`);
-      cell.innerText = board[i][j];
-    }
-  }
-}
-
 function checkRow() {
   for (let i = 0; i < board.length; i++) {
     for (let j = 0; j < board.length; j++) {
@@ -75,7 +68,11 @@ function checkRow() {
         board[i][0] === board[i][1] &&
         board[i][1] === board[i][2]
       ) {
-        gameState.gameStatus = "isOver";
+        if (board[i][0] === "x") {
+          gameState.gameStatus = "xWins";
+        } else if (board[i][0] === "o") {
+          gameState.gameStatus = "oWins";
+        }
         console.log(board[i][0]);
         return board[i][0];
       }
@@ -90,7 +87,11 @@ function checkColumn() {
         board[0][j] === board[1][j] &&
         board[1][j] === board[2][j]
       ) {
-        gameState.gameStatus = "isOver";
+        if (board[i][0] === "x") {
+          gameState.gameStatus = "xWins";
+        } else if (board[i][0] === "o") {
+          gameState.gameStatus = "oWins";
+        }
         console.log(board[0][j]);
         return board[0][j];
       }
@@ -108,7 +109,11 @@ function checkDiagonals() {
           board[0][2] === board[1][1] &&
           board[1][1] === board[2][0])
       ) {
-        gameState.gameStatus = "isOver";
+        if (board[i][0] === "x") {
+          gameState.gameStatus = "xWins";
+        } else if (board[i][0] === "o") {
+          gameState.gameStatus = "oWins";
+        }
         console.log(board[1][1]);
         return board[1][1];
       }
@@ -116,10 +121,49 @@ function checkDiagonals() {
   }
 }
 
+function checkDraw() {
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board.length; j++) {
+      if (board[i][j] === null) {
+        return;
+      }
+    }
+  }
+  gameState.gameStatus = "cat";
+  console.log(gameState.gameStatus);
+}
+
+function endGame() {
+  if (gameState.gameStatus === "xWins") {
+    xDiv.setAttribute("id", "xDiv");
+    xDiv.style.display = "flex";
+    const xhtml = "<h1>X is the Winner!</h1>";
+    xDiv.innerHTML = xhtml;
+    boardContainer.appendChild(xDiv);
+  } else if (gameState.gameStatus === "oWins") {
+    oDiv.setAttribute("id", "oDiv");
+    oDiv.style.display = "flex";
+    const ohtml = "<h1>O is the Winner!</h1>";
+    oDiv.innerHTML = ohtml;
+    boardContainer.appendChild(oDiv);
+  }
+}
+
 function checkWin() {
   checkRow();
   checkColumn();
   checkDiagonals();
+  checkDraw();
+  endGame();
+}
+
+function renderGame() {
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board.length; j++) {
+      const cell = document.getElementById(`${i},${j}`);
+      cell.innerText = board[i][j];
+    }
+  }
 }
 
 function switchPlayer() {
@@ -128,9 +172,43 @@ function switchPlayer() {
   gameState.currentPlayer = gameState.players[nextIndex];
 }
 
-function boardClick(event) {
+function CompRandomMove() {
+  console.count("word");
+  const rowIdx = Math.floor(Math.random() * 3);
+  const colIdx = Math.floor(Math.random() * 3);
+  console.log(rowIdx, colIdx);
+  if (gameState.gameStatus !== "isPlaying") {
+    return;
+  } else if (board[rowIdx][colIdx] !== null) {
+    return CompRandomMove();
+  } else {
+    board[rowIdx][colIdx] = gameState.currentPlayer;
+    return;
+  }
+}
+
+function boardClickP1(event) {
   let ids = event.target.id.split(",").map((item) => parseInt(item));
-  if (gameState.gameStatus === "isOver") {
+  if (gameState.gameStatus !== "isPlaying") {
+    return;
+  }
+  if (board[ids[0]][ids[1]] !== null) {
+    return;
+  } else {
+    board[ids[0]][ids[1]] = gameState.currentPlayer;
+    switchPlayer();
+    renderGame();
+    checkWin();
+  }
+  CompRandomMove();
+  switchPlayer();
+  renderGame();
+  checkWin();
+}
+
+function boardClickP2(event) {
+  let ids = event.target.id.split(",").map((item) => parseInt(item));
+  if (gameState.gameStatus !== "isPlaying") {
     return;
   }
   if (board[ids[0]][ids[1]] !== null) {
@@ -160,6 +238,7 @@ function runPlayerOne() {
   }
   const newItemForm = document.getElementById("new-item");
   newItemForm.addEventListener("submit", submitName);
+  boardContainer.addEventListener("click", boardClickP1);
 }
 
 function runPlayerTwo2() {
@@ -201,6 +280,7 @@ function runPlayerTwo() {
   }
   const newItemForm = document.getElementById("new-item");
   newItemForm.addEventListener("submit", submitName);
+  boardContainer.addEventListener("click", boardClickP2);
 }
 
 function amtOfPlayers() {
@@ -229,8 +309,11 @@ function newGame() {
   );
   gameState.gameStatus = "isPlaying";
   renderGame();
+  if (gameState.gameStatus === "isPlaying") {
+    xDiv.style.display = "none";
+    oDiv.style.display = "none";
+  }
 }
 
-boardContainer.addEventListener("click", boardClick);
 startGameButton.addEventListener("click", amtOfPlayers);
 newGameButton.addEventListener("click", newGame);
